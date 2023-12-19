@@ -161,7 +161,11 @@
             </div>
             <div class="form_content">
                 <label for="OrderID">Your Order ID <span>*</span></label>
-                <input type="text" id="OrderID" value="ORD-KOL-4521" disabled placeholder="Enter Your Order ID">
+                <input type="text" id="OrderID"  disabled placeholder="Enter Your Order ID">
+            </div>
+            <div class="form_content">
+                <label for="MobileNo">Mobile Number <span>*</span></label>
+                <input type="text" id="MobileNo"  disabled placeholder="Enter Your Mobile Number">
             </div>
             <div class="form_content">
                 <label for="sp_support">Whether sales person was helpful to you ? <span>*</span></label>
@@ -232,7 +236,9 @@
         document.addEventListener('DOMContentLoaded', function () {
             var url = window.location.href;
             var id = url.split('?e=')[1]
-            document.getElementById('OrderID').value = id;
+            details = id.split('&n=');
+            document.getElementById('OrderID').value = details[0];
+            document.getElementById('MobileNo').value = details[1];
         })
         document.getElementById('myForm').addEventListener('submit', function (e) {
             e.preventDefault();
@@ -244,14 +250,12 @@
             var sp_support = document.getElementById('sp_support').value;
             var starselected = document.getElementById('starselected').innerHTML;
             var reviews = document.getElementById('reviews').value;
-            fetch('https://script.google.com/macros/s/AKfycbwCO3lYp9whr36XVAsSutVzKHdfKjji7XGSjBINjO0zH5YIiKxDE6Kzt03YmPAwLoWl/exec?OrderID=' + OrderID + '&support_SP=' + sp_support + '&rating=' + starselected + '&reviews=' + reviews);
+            var MobileNo = document.getElementById('MobileNo').value;
+            fetch('https://script.google.com/macros/s/AKfycbwCO3lYp9whr36XVAsSutVzKHdfKjji7XGSjBINjO0zH5YIiKxDE6Kzt03YmPAwLoWl/exec?OrderID=' + OrderID + '&support_SP=' + sp_support + '&rating=' + starselected + '&reviews=' + reviews+'&mob='+MobileNo);
             document.getElementById('myForm').reset()
 
             document.getElementsByClassName('form_contentp')[0].style.display = 'block'
         })
     </script>
-
-
 </body>
-
 </html>
